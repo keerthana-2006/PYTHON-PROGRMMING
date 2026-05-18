@@ -58,3 +58,40 @@ def complex_func(a, b, *args, option="default", **kwargs):
     print(f"kwargs={kwargs}")
 
 complex_func(1, 2, 3, 4, 5, option="custom", x=10, y=20)
+
+#Scope and Lifetime
+
+# Global variable
+global_var = 100
+
+def my_function():
+    # Local variable
+    local_var = 50
+    print(local_var)
+    print(global_var)  # Access global
+
+my_function()
+# print(local_var)  # Error - local_var not accessible
+
+# Modifying global variable
+counter = 0
+
+def increment():
+    global counter
+    counter += 1
+
+increment()
+print(counter)  # 1
+
+# Nonlocal keyword (for nested functions)
+def outer():
+    x = 10
+    def inner():
+        nonlocal x
+        x += 5
+        print(f"Inner: {x}")
+    inner()
+    print(f"Outer: {x}")
+
+outer()
+# Output: Inner: 15, Outer: 15
